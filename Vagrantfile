@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
     unzip /home/vagrant/file-api.zip -d /home/vagrant
     
     sudo cp /home/vagrant/file-api-master/confs/nginx-file-api /etc/nginx/sites-available/file-api
+    sudo rm -rf /etc/nginx/sites-enabled/default
     sudo ln -s /etc/nginx/sites-available/file-api /etc/nginx/sites-enabled/file-api
     mkdir -p /home/vagrant/file-api-master/www/application/config/development
     sudo cp /home/vagrant/file-api-master/confs/database.php /home/vagrant/file-api-master/www/application/config/development/database.php

@@ -7,5 +7,5 @@ vagrant up
 
 To test:
 ```
-$ php test.php
+php test.php
 ```

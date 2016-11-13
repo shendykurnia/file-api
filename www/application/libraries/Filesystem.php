@@ -15,7 +15,8 @@ class Filesystem implements FileStorage {
     }
 
     public function write($source, $path) {
-        $full_path = $this->folder . '/' . $path;
+        $subfolders = $this->get_subfolders_by_filename($path);
+        $full_path = $this->folder . '/' . $subfolders . '/' . $path;
         $dirname = dirname($full_path);
         $success = mkdir($dirname, 0777, true);
         if (!$success || !file_exists($dirname) || !is_writable($dirname)) {
@@ -29,10 +30,21 @@ class Filesystem implements FileStorage {
     }
 
     public function read($path) {
-        return file_get_contents($this->folder . '/' . $path);
+        return file_get_contents($this->folder . '/' . $this->get_subfolders_by_filename($path) . '/' . $path);
     }
 
     public function delete($path) {
-        return unlink($this->folder . '/' . $path);
+        return unlink($this->folder . '/' . $this->get_subfolders_by_filename($path) . '/' . $path);
+    }
+
+    private function get_subfolders_by_filename($filename) {
+        $subfolders = [];
+        for ($i = 0; $i < 3; $i++) {
+            if ($i >= strlen($filename)) {
+                break;
+            }
+            $subfolders[] = substr($filename, $i, 1);
+        }
+        return implode('/', $subfolders);
     }
 }

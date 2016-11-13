@@ -27,7 +27,7 @@ curl --request POST --form "file=@sample2.jpg" --form 'name=sample.jpg' --form '
 # ok
 # md5 should be the same as sample2.jpg
 
-curl --request GET 'http://localhost:1234/drive/v1/file?name=not-there.jpg'
+curl -v --request GET 'http://localhost:1234/drive/v1/file?name=not-there.jpg'
 # 404
 
 curl -s --request GET 'http://localhost:1234/drive/v1/file?name=sample.jpg' > get-sample.jpg
@@ -39,4 +39,8 @@ curl --request DELETE 'http://localhost:1234/drive/v1/file?name=not-there.jpg'
 
 curl --request DELETE 'http://localhost:1234/drive/v1/file?name=sample.jpg'
 # ok
+
+curl -s --request GET 'http://localhost:1234/drive/v1/file?name=sample2.jpg' > get-sample2.jpg
+# md5 get-sample2.jpg
+# md5 sample2.jpg
 ```

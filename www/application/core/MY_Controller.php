@@ -12,9 +12,10 @@ class MY_Controller extends REST_Controller {
         $this->migration->latest();
     }
 
-    protected function return_error($message, $http_code = REST_Controller::HTTP_BAD_REQUEST) {
+    protected function return_error($code, $message, $http_code = REST_Controller::HTTP_BAD_REQUEST) {
         $this->set_response([
             'status' => 'error',
+            'error_code' => $code,
             'message' => $message
         ], $http_code);
     }
